@@ -1,0 +1,20 @@
+<br>
+
+<div class="container">
+    <form (ngSubmit)="enviarFormulario()" #formulario="ngForm">
+        <div *ngFor="let pregunta of preguntas; let i = index" class="mb-3">
+            <label for="pregunta{{i}}" class="form-label font-weight-bold">{{pregunta.texto}}</label>
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="respuestas[i]"
+                name="pregunta{{i}}" required>
+                <option [ngValue]="null" disabled selected>Seleccione una opción</option>
+                <option *ngFor="let opcion of pregunta.opciones" [ngValue]="opcion.valor">{{opcion.texto}}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Enviar</button>
+    </form>
+</div>
+
+<br>
+<br>
+<br>
+<br>

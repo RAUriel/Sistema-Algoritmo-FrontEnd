@@ -1,0 +1,37 @@
+<div>
+    <input type="file" (change)="onFileChange($event)" />
+
+    <div class="table-container">
+        <table *ngIf="data.length > 0">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of columns; let i = index">
+                        <input type="text" [(ngModel)]="columns[i]" (change)="onColumnTitleChange(i, $event)" />
+                        <button (click)="removeColumn(i)">❌</button>
+                    </th>
+                    <th>
+                        <button (click)="addColumn()">+ Columna</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of data; let rowIndex = index">
+                    <td *ngFor="let cell of row; let colIndex = index">
+                        <input *ngIf="editableCells[rowIndex][colIndex]" type="text" [(ngModel)]="data[rowIndex][colIndex]" />
+                        <span *ngIf="!editableCells[rowIndex][colIndex]">{{ cell }}</span>
+                    </td>
+                    <td>
+                        <button (click)="removeRow(rowIndex)">❌</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="selectedVariables.length > 0">
+        <h3>Variables seleccionadas:</h3>
+        <ul>
+            <li *ngFor="let variable of selectedVariables">{{ variable }}</li>
+        </ul>
+    </div>
+</div>

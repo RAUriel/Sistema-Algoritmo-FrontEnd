@@ -1,0 +1,64 @@
+import { Component } from '@angular/core';
+import * as XLSX from 'xlsx';
+
+@Component({
+  selector: 'app-general',
+  templateUrl: './general.component.html',
+  styleUrls: ['./general.component.css']
+})
+export class GeneralComponent {
+  data: any[][] = [];
+  columns: string[] = [];
+  selectedVariables: string[] = [];
+  editableCells: boolean[][] = [];
+
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const wb = XLSX.read(e.target.result, { type: 'binary' });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      this.data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      if (this.data.length > 0) {
+        this.columns = this.data[0];
+        this.data.shift();
+        this.initializeEditableCells();
+      }
+    };
+    reader.readAsBinaryString(file);
+  }
+
+  onColumnTitleChange(index: number, event: any): void {
+    this.columns[index] = event.target.value;
+  }
+
+  addColumn(): void {
+    const newColumn = `Nueva Columna ${this.columns.length + 1}`;
+    this.columns.push(newColumn);
+    this.data.forEach(row => row.push(''));
+    this.initializeEditableCells();
+  }
+
+  removeColumn(index: number): void {
+    this.columns.splice(index, 1);
+    this.data.forEach(row => row.splice(index, 1));
+    this.initializeEditableCells();
+  }
+
+  removeRow(index: number): void {
+    this.data.splice(index, 1);
+    this.initializeEditableCells();
+  }
+
+  initializeEditableCells(): void {
+    this.editableCells = this.data.map(() => new Array(this.columns.length).fill(false));
+  }
+
+  onVariableSelect(event: any, column: string): void {
+    if (event.target.checked) {
+      this.selectedVariables.push(column);
+    } else {
+      this.selectedVariables = this.selectedVariables.filter(varName => varName !== column);
+    }
+  }
+}

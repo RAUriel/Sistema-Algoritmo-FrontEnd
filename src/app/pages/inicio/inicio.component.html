@@ -1,0 +1,22 @@
+<br>
+<br>
+<br>
+
+<p class="commander">Da Click en el Botón!</p>
+<div class="wrapper">
+  <div class="menu">
+    <ul class="menu__list">
+      <li class="menu__list__item"><a (click)="navigateTo('formulario')">Formulario</a></li>
+      <li class="menu__list__item"><a (click)="navigateTo('datos')">Datos</a></li>
+      <li class="menu__list__item"><a (click)="navigateTo('general')">Transformar</a></li>
+    </ul>
+  </div>
+
+  <br>
+
+  <div class="button" (click)="toggleMenu()">
+    <span class="button__line"></span>
+    <span class="button__line"></span>
+    <span class="button__line"></span>
+  </div>
+</div>

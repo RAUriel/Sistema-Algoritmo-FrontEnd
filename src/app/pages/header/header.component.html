@@ -1,0 +1,12 @@
+<header class="header">
+    <div class="container">
+      <a [routerLink]="['/inicio']" class="logo">Sistema de Algoritmos</a>
+      <nav class="navbar">
+        <ul class="nav-list">
+          <li class="active"> <a (click)="navigateTo('inicio')">Inicio</a> </li>
+          <li class="active"> <a (click)="navigateTo('formulario')">Formulario</a> </li>
+          <li class="active"> <a (click)="navigateTo('knn')">KNN</a> </li>
+        </ul>
+      </nav>
+    </div>
+</header>

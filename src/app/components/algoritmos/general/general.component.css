@@ -1,0 +1,145 @@
+/* Estilo general del componente */
+:host {
+    display: block;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilo del contenedor principal */
+  div {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  /* Estilo del input de archivo */
+  input[type="file"] {
+    margin-bottom: 20px;
+    display: block;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 16px;
+  }
+  
+  /* Estilo de la tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo del encabezado de la tabla */
+  thead {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  th {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* Estilo de las celdas de la tabla */
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Estilo de la fila de encabezado */
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  /* Estilo de la fila al pasar el cursor */
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Estilo para las checkboxes */
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Estilo de las variables seleccionadas */
+  h3 {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+  
+  li:last-child {
+    border-bottom: none;
+  }
+
+  .table-container {
+    width: 100%; /* Ajusta el contenedor al ancho disponible */
+    overflow-x: auto; /* Habilita el desplazamiento horizontal si es necesario */
+    margin-bottom: 20px; /* Espacio inferior para separarlo de otros elementos */
+  }
+  
+  table {
+    width: 100%; /* Asegura que la tabla ocupe el 100% del ancho del contenedor */
+    border-collapse: collapse; /* Asegura que las fronteras de las celdas se unan */
+  }
+  
+  thead th, tbody td {
+    border: 1px solid #ddd; /* Añade una frontera ligera a las celdas */
+    padding: 8px; /* Espacio interno en las celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+  }
+  
+  thead th {
+    background-color: #f4f4f4; /* Color de fondo para los encabezados */
+    position: sticky; /* Fija los encabezados en la parte superior cuando se desplaza */
+    top: 0; /* Alineación con la parte superior del contenedor */
+    z-index: 1; /* Asegura que los encabezados estén encima del contenido */
+  }
+  
+  input[type="text"] {
+    width: 100%; /* Hace que los campos de entrada ocupen todo el ancho de la celda */
+    box-sizing: border-box; /* Asegura que el ancho total incluya el relleno y el borde */
+  }
+  
+  button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Elimina el borde del botón */
+    padding: 6px 12px; /* Relleno del botón */
+    cursor: pointer; /* Cambia el cursor a una mano cuando se pasa sobre el botón */
+    border-radius: 4px; /* Bordes redondeados del botón */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Color de fondo del botón cuando se pasa sobre él */
+  }
+  
+  h3 {
+    margin-top: 20px; /* Espacio superior para separar el título de otros elementos */
+  }
+  
+  ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding-left: 0; /* Elimina el relleno izquierdo */
+  }
+  
+  li {
+    margin-bottom: 10px; /* Espacio inferior entre los elementos de la lista */
+  }
