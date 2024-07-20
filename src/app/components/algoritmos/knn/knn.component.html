@@ -1,1 +1,17 @@
-<p>knn works!</p>
+<div class="container mt-4">
+    <div class="mb-3">
+        <label for="fileUpload" class="form-label">Sube el archivo Excel:</label>
+        <input type="file" id="fileUpload" class="form-control" (change)="onFileChange($event)" />
+    </div>
+
+    <button (click)="clasificar()" [disabled]="!file" class="btn btn-primary">
+        Realizar la Clasificación
+    </button>
+
+    <div *ngIf="classificationResult" class="mt-4">
+        <h3 class="mb-3">Clasificación Resultante:</h3>
+        <div class="alert alert-info">
+            {{ classificationResult }}
+        </div>
+    </div>
+</div>
