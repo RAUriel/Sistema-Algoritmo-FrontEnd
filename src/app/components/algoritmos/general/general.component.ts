@@ -13,11 +13,26 @@ export class GeneralComponent {
   columns: string[] = [];
   selectedVariables: string[] = [];
   editableCells: boolean[][] = [];
+  fileError: string | null = null;
 
   constructor(private router: Router) {}
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
+
+    // Validar tipo de archivo
+    const validTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+    if (!file || !validTypes.includes(file.type)) {
+      this.fileError = 'Solo se permiten archivos Excel.';
+      event.target.value = ''; // Limpiar el campo de entrada
+      this.data = [];
+      this.columns = [];
+      this.fileError = null;
+      return;
+    }
+
+    this.fileError = null;
+
     const reader = new FileReader();
     reader.onload = (e: any) => {
       const wb = XLSX.read(e.target.result, { type: 'binary' });
@@ -25,7 +40,7 @@ export class GeneralComponent {
       this.data = XLSX.utils.sheet_to_json(ws, { header: 1 });
       if (this.data.length > 0) {
         this.columns = this.data[0];
-        this.data.shift();
+        this.data.shift(); // Remove the header row
         this.initializeEditableCells();
       }
     };

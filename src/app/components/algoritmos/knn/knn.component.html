@@ -2,6 +2,7 @@
     <div class="mb-3">
         <label for="fileUpload" class="form-label">Sube el archivo Excel:</label>
         <input type="file" id="fileUpload" class="form-control" (change)="onFileChange($event)" />
+        <p *ngIf="fileError" class="text-danger">{{ fileError }}</p>
     </div>
 
     <button (click)="clasificar()" [disabled]="!file" class="btn btn-primary">
