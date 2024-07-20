@@ -14,6 +14,7 @@ Chart.register(...registerables);
   styleUrls: ['./knn.component.css']
 })
 export class KnnComponent implements OnInit {
+  fileError: string | null = null;
   data: any[][] = [];
   columns: string[] = [];
   file: File | null = null;
@@ -27,8 +28,23 @@ export class KnnComponent implements OnInit {
   }
 
   onFileChange(event: any): void {
-    this.file = event.target.files[0];
-    if (this.file) {
+    const file = event.target.files[0];
+
+    if (file) {
+      // Validar tipo de archivo
+      const validTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+      if (!validTypes.includes(file.type)) {
+        this.fileError = 'Solo se permiten archivos Excel.';
+        event.target.value = ''; // Limpiar el campo de entrada
+        this.file = null;
+        this.data = [];
+        this.columns = [];
+        return;
+      }
+
+      this.fileError = null;
+      this.file = file;
+
       const reader = new FileReader();
       reader.onload = (e: any) => {
         const wb = XLSX.read(e.target.result, { type: 'binary' });
