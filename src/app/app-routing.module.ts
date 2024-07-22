@@ -5,6 +5,7 @@ import { GeneralComponent } from './components/algoritmos/general/general.compon
 import { KnnComponent } from './components/algoritmos/knn/knn.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { DatosComponent } from './pages/datos/datos.component';
+import { KmeansComponent } from './components/algoritmos/kmeans/kmeans.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'formulario', component: FormularioComponent },
   { path: 'general', component: GeneralComponent },
   { path: 'datos', component: DatosComponent },
+  { path: 'kmeans', component: KmeansComponent },
   { path: 'knn', component: KnnComponent },
   { path: '**', redirectTo: '/inicio' }
 ];

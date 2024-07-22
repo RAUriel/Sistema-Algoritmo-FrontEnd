@@ -1,1 +1,32 @@
-<p>kmeans works!</p>
+<div class="container mt-4">
+    <div class="mb-3">
+        <label for="fileUpload" class="form-label">Sube el archivo Excel:</label>
+        <input type="file" id="fileUpload" class="form-control" (change)="onFileChange($event)" />
+        <p *ngIf="fileError" class="text-danger">{{ fileError }}</p>
+    </div>
+
+    <button (click)="clasificar()" [disabled]="!file" class="btn btn-primary">
+        Realizar la Clasificación por el Algoritmo K-Means
+    </button>
+
+    <div class="mt-3">
+        <label class="form-label">Clasificación Resultante al Cluster:</label>
+        <div class="alert alert-info" *ngIf="classificationResult">
+            {{ classificationResult }}
+        </div>
+    </div>
+
+    <!-- Añadir un canvas para el gráfico -->
+    <div class="mt-4">
+        <canvas id="kmeansChart" width="400" height="400"></canvas>
+    </div>
+
+    <button (click)="downloadChartAsPDF()" [disabled]="!kmeansChart" class="btn btn-secondary mt-2">
+        Descargar Gráfico
+    </button>
+</div>
+
+<br>
+<br>
+<br>
+<br>
