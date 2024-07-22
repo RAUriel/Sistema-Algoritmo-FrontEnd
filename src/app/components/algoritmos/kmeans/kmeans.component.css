@@ -1,0 +1,33 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .alert-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
+  .mt-4 {
+    margin-top: 2rem;
+  }
+  
+  /* Estilo adicional para el label de clasificación resultante */
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+  }

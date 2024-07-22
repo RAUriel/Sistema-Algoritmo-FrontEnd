@@ -137,7 +137,7 @@ export class KnnComponent implements OnInit {
       data: {
         datasets: [
           {
-            label: 'Puntos Visual',
+            label: 'Clase Visual',
             data: visualPoints.map(point => ({ x: point[0], y: point[1] })),
             backgroundColor: 'rgba(75, 192, 192, 0.6)',
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -145,7 +145,7 @@ export class KnnComponent implements OnInit {
             showLine: false
           },
           {
-            label: 'Puntos Auditivo',
+            label: 'Clase Auditiva',
             data: auditivoPoints.map(point => ({ x: point[0], y: point[1] })),
             backgroundColor: 'rgba(255, 99, 132, 0.6)',
             borderColor: 'rgba(255, 99, 132, 1)',
@@ -153,7 +153,7 @@ export class KnnComponent implements OnInit {
             showLine: false
           },
           {
-            label: 'Puntos Kinestésico',
+            label: 'Clase Kinestésico',
             data: kinestesicoPoints.map(point => ({ x: point[0], y: point[1] })),
             backgroundColor: 'rgba(255, 206, 86, 0.6)',
             borderColor: 'rgba(255, 206, 86, 1)',
@@ -161,7 +161,7 @@ export class KnnComponent implements OnInit {
             showLine: false
           },
           {
-            label: 'Punto Clasificado',
+            label: 'Resultado Clasificado',
             data: [classifiedPoint],
             backgroundColor: 'rgba(153, 102, 255, 0.6)',
             borderColor: 'rgba(153, 102, 255, 1)',

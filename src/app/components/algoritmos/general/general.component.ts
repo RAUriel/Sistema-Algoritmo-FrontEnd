@@ -98,7 +98,21 @@ export class GeneralComponent {
       cancelButtonText: 'No, cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['/knn']);
+        // Mostrar alerta adicional para seleccionar entre KNN o KMEANS
+        Swal.fire({
+          title: 'Selecciona el método de evaluación',
+          text: '¿Deseas evaluar con KNN o con KMEANS?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'KNN',
+          cancelButtonText: 'KMEANS'
+        }).then((methodResult) => {
+          if (methodResult.isConfirmed) {
+            this.router.navigate(['/knn']);
+          } else if (methodResult.dismiss === Swal.DismissReason.cancel) {
+            this.router.navigate(['/kmeans']);
+          }
+        });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelado',
