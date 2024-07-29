@@ -104,24 +104,26 @@ export class KmeansComponent implements OnInit {
   }
 
   private createChart(result: { tiposAprendizaje: string[] }): void {
-    const numPoints = 300;
-    const centers = [
-      [2, 2],
-      [-2, -2],
-      [2, -2]
+    const visualPoints = this.generateGaussianPoints(10, [0, -1], 1);
+    const auditivoPoints = this.generateGaussianPoints(10, [-1, 0.5], 1);
+    const kinestesicoPoints = this.generateGaussianPoints(10, [1, 1], 1);
+
+    const data = [
+      ...visualPoints.map(point => ({ x: point[0], y: point[1], cluster: 'Visual' })),
+      ...auditivoPoints.map(point => ({ x: point[0], y: point[1], cluster: 'Auditivo' })),
+      ...kinestesicoPoints.map(point => ({ x: point[0], y: point[1], cluster: 'Kinestésico' }))
     ];
-    const data = this.generateGaussianData(numPoints, centers);
 
     const ctx = (document.getElementById('kmeansChart') as HTMLCanvasElement).getContext('2d');
     if (!ctx) return;
 
-    const clusterLabels = ['Cluster Visual', 'Cluster Auditivo', 'Cluster Kinestésico'];
+    const clusterLabels = ['Visual', 'Auditivo', 'Kinestésico'];
     const colors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'];
 
     // Crear datos para el gráfico
     const dataset = clusterLabels.map((label, index) => ({
-      label,
-      data: data.filter((_, i) => i % clusterLabels.length === index),
+      label: `Cluster ${label}`,
+      data: data.filter(point => point.cluster === label),
       backgroundColor: colors[index],
       borderColor: colors[index],
       borderWidth: 1,
@@ -150,7 +152,6 @@ export class KmeansComponent implements OnInit {
           tooltip: {
             callbacks: {
               label: (tooltipItem) => {
-                // Asegúrate de que 'tooltipItem' tenga las propiedades adecuadas
                 const x = (tooltipItem.raw as ScatterPoint).x.toFixed(2);
                 const y = (tooltipItem.raw as ScatterPoint).y.toFixed(2);
                 return `(${x}, ${y})`;
@@ -176,16 +177,14 @@ export class KmeansComponent implements OnInit {
     });
   }
 
-  private generateGaussianData(numPoints: number, centers: number[][], stdDev: number = 1): ScatterPoint[] {
-    const data: ScatterPoint[] = [];
-    centers.forEach(center => {
-      for (let i = 0; i < numPoints / centers.length; i++) {
-        const x = center[0] + stdDev * (Math.random() - 0.5);
-        const y = center[1] + stdDev * (Math.random() - 0.5);
-        data.push({ x, y });
-      }
-    });
-    return data;
+  private generateGaussianPoints(numPoints: number, center: number[], spread: number): number[][] {
+    const points: number[][] = [];
+    for (let i = 0; i < numPoints; i++) {
+      const x = center[0] + (Math.random() - 0.5) * spread;
+      const y = center[1] + (Math.random() - 0.5) * spread;
+      points.push([x, y]);
+    }
+    return points;
   }
 
   downloadChartAsPDF(): void {

@@ -20,11 +20,10 @@ export class GeneralComponent {
   onFileChange(event: any): void {
     const file = event.target.files[0];
 
-    // Validar tipo de archivo
     const validTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
     if (!file || !validTypes.includes(file.type)) {
       this.fileError = 'Solo se permiten archivos Excel.';
-      event.target.value = ''; // Limpiar el campo de entrada
+      event.target.value = '';
       this.data = [];
       this.columns = [];
       this.fileError = null;
@@ -40,7 +39,7 @@ export class GeneralComponent {
       this.data = XLSX.utils.sheet_to_json(ws, { header: 1 });
       if (this.data.length > 0) {
         this.columns = this.data[0];
-        this.data.shift(); // Remove the header row
+        this.data.shift();
         this.initializeEditableCells();
       }
     };
@@ -55,7 +54,7 @@ export class GeneralComponent {
     const newColumn = `Nueva Columna ${this.columns.length + 1}`;
     this.columns.push(newColumn);
     this.data.forEach(row => row.push(''));
-    this.initializeEditableCells();
+    this.editableCells.forEach(row => row.push(true));
   }
 
   removeColumn(index: number): void {
@@ -70,7 +69,23 @@ export class GeneralComponent {
   }
 
   initializeEditableCells(): void {
-    this.editableCells = this.data.map(() => new Array(this.columns.length).fill(false));
+    this.editableCells = this.data.map(row => new Array(this.columns.length).fill(true));
+  }
+
+  updateCellValue(value: any, rowIndex: number, colIndex: number): void {
+    this.data[rowIndex][colIndex] = value;
+  }
+
+  validateCellValue(rowIndex: number, colIndex: number): void {
+    const value = this.data[rowIndex][colIndex];
+    if (!/^[0-2]$/.test(value)) {
+      this.data[rowIndex][colIndex] = '';
+      Swal.fire({
+        icon: 'error',
+        title: 'Valor no permitido',
+        text: 'Solo se permiten los valores 0, 1 y 2.',
+      });
+    }
   }
 
   onVariableSelect(event: any, column: string): void {
@@ -88,7 +103,6 @@ export class GeneralComponent {
 
     XLSX.writeFile(wb, 'Datos_Modificados.xlsx');
 
-    // Mostrar alerta después de generar el archivo Excel
     Swal.fire({
       title: '¿Deseas continuar?',
       text: 'A continuación serás redirigido a la página para realizar la evaluación.',
@@ -98,7 +112,6 @@ export class GeneralComponent {
       cancelButtonText: 'No, cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Mostrar alerta adicional para seleccionar entre KNN o KMEANS
         Swal.fire({
           title: 'Selecciona el método de evaluación',
           text: '¿Deseas evaluar con KNN o con KMEANS?',
@@ -122,8 +135,8 @@ export class GeneralComponent {
       }
     });
   }
-
 }
+
 
 /*
 import { Component } from '@angular/core';

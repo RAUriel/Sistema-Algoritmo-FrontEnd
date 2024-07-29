@@ -7,18 +7,21 @@
                 <tr>
                     <th *ngFor="let column of columns; let i = index">
                         <input type="text" [(ngModel)]="columns[i]" (change)="onColumnTitleChange(i, $event)" />
-                        <button (click)="removeColumn(i)">❌</button>
+                        
                     </th>
-                    <th>
-                        <button (click)="addColumn()">+ Columna</button>
-                    </th>
+                    
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let row of data; let rowIndex = index">
                     <td *ngFor="let cell of row; let colIndex = index">
-                        <input *ngIf="editableCells[rowIndex][colIndex]" type="text" [(ngModel)]="data[rowIndex][colIndex]" />
-                        <span *ngIf="!editableCells[rowIndex][colIndex]">{{ cell }}</span>
+                        <input 
+                            type="text" 
+                            [ngModel]="data[rowIndex][colIndex]" 
+                            (ngModelChange)="updateCellValue($event, rowIndex, colIndex)" 
+                            (blur)="validateCellValue(rowIndex, colIndex)"
+                            maxlength="1"
+                        />
                     </td>
                     <td>
                         <button (click)="removeRow(rowIndex)">❌</button>

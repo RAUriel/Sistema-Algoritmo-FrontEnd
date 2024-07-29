@@ -99,30 +99,32 @@ export class KnnComponent implements OnInit {
   }
 
   private createChart(respuestas: number[][], result: any): void {
-    // Datos de ejemplo para las tres clases
     const visualPoints = [
-      [1, 1], [1.2, 1.1], [0.8, 0.9], [1.1, 0.8] // Ajusta los puntos como necesites
+      [1, 1], [1.5, 1.5], [1.2, 2], [1.1, 0.8], [1.5, 2],
+      [1.3, 1.3], [1.4, 1.7], [1.2, 1.8] // Nuevos puntos ajustados
     ];
     const auditivoPoints = [
-      [2, 2], [2.1, 2.2], [1.9, 2.1], [2.2, 1.9] // Ajusta los puntos como necesites
+      [2.5, 2.5], [2.1, 2.2], [3, 2], [2.2, 1.9], [2.5, 1.5],
+      [2.3, 2.1], [2.4, 2.4], [2.7, 2.2] // Nuevos puntos ajustados
     ];
     const kinestesicoPoints = [
-      [4, 4], [4.1, 4.2], [3.9, 4.1], [4.2, 3.9] // Ajusta los puntos como necesites
+      [3, 3], [3.1, 3.2], [3.9, 3.1], [3.2, 3.9], [2, 3],
+      [3.3, 3.4], [3.1, 3.5], [2.8, 3.2] // Nuevos puntos ajustados
     ];
 
     // Colocar el punto clasificado en las coordenadas de la clase a la que pertenece
     let classifiedPoint: { x: number; y: number } = { x: 0, y: 0 };
     const classification = this.classificationResult?.toLowerCase();
-    
+
     switch (classification) {
       case 'visual':
-        classifiedPoint = { x: 1, y: 1 }; // Ajustar según necesidad
+        classifiedPoint = { x: 1.5, y: 1.5 }; // Ajustar según necesidad
         break;
       case 'auditivo':
-        classifiedPoint = { x: 2, y: 2 }; // Ajustar según necesidad
+        classifiedPoint = { x: 2.5, y: 2.5 }; // Ajustar según necesidad
         break;
       case 'kinestésico':
-        classifiedPoint = { x: 4, y: 4 }; // Ajustar según necesidad
+        classifiedPoint = { x: 3, y: 3 }; // Ajustar según necesidad
         break;
       default:
         classifiedPoint = { x: 0, y: 0 }; // Default position if unknown
