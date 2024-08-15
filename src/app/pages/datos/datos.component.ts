@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../services/datos.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
@@ -6,19 +6,26 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-datos',
   templateUrl: './datos.component.html',
-  styleUrl: './datos.component.css'
+  styleUrls: ['./datos.component.css']
 })
-export class DatosComponent {
+export class DatosComponent implements OnInit {
   respuestas: any[] = [];
+  filters = {
+    visual: true,
+    auditivo: true,
+    kinestesico: true
+  };
 
   constructor(private datosService: DatosService) { }
+
+  ngOnInit() {
+    this.obtenerDatos();
+  }
 
   obtenerDatos(): void {
     this.datosService.obtenerDatos().subscribe(
       data => {
         this.respuestas = data;
-        console.log(data);
-  
         Swal.fire({
           icon: 'success',
           text: 'Existen Datos para su Descarga',
@@ -40,34 +47,46 @@ export class DatosComponent {
         });
       }
     );
-  }  
+  }
 
   descargarExcel(): void {
-    // Verificar si respuestas no está vacío
     if (this.respuestas.length === 0) {
       console.error('No hay datos para descargar.');
       return;
     }
-  
-    // Define las columnas del archivo Excel
+
+    const filtro = Object.keys(this.filters)
+      .filter(key => this.filters[key])
+      .map(key => {
+        switch (key) {
+          case 'visual': return 0;
+          case 'auditivo': return 1;
+          case 'kinestesico': return 2;
+          default: return null;
+        }
+      })
+      .filter((value): value is 0 | 1 | 2 => value !== null);
+
+    // Filtrar las respuestas según el filtro
+    const filteredData = this.respuestas.filter(respuesta =>
+      Object.values(respuesta).every((value: any) => filtro.includes(value as 0 | 1 | 2))
+    );
+
     const columns = [
-      '¿Cuál de los siguientes métodos prefieres para aprender algo nuevo?', 'Cuando estudias, ¿qué tipo de material te resulta más efectivo?', '¿Cómo te sientes más cómodo al recordar información?', 'En una clase, ¿qué tipo de actividad te ayuda a entender mejor el contenido?', 'Si tienes que ensamblar un mueble, ¿cómo prefieres seguir las instrucciones?', 
-      '¿Qué tipo de ejercicios prefieres en una clase de educación física?', '¿Cuál es tu método preferido para repasar antes de un examen?', '¿Cómo prefieres aprender a usar un nuevo software o aplicación?', '¿Qué te resulta más fácil recordar después de una conferencia?', '¿Cómo prefieres preparar una receta de cocina?'
+      'Pregunta 1', 'Pregunta 2', 'Pregunta 3', 'Pregunta 4', 'Pregunta 5',
+      'Pregunta 6', 'Pregunta 7', 'Pregunta 8', 'Pregunta 9', 'Pregunta 10'
     ];
-  
-    // Estructura los datos para el archivo Excel
-    const data = this.respuestas.map(respuesta => [
-      respuesta.respuesta1, respuesta.respuesta2, respuesta.respuesta3, respuesta.respuesta4, respuesta.respuesta5,
-      respuesta.respuesta6, respuesta.respuesta7, respuesta.respuesta8, respuesta.respuesta9, respuesta.respuesta10
+
+    const data = filteredData.map(respuesta => [
+      respuesta.respuesta1, respuesta.respuesta2, respuesta.respuesta3, respuesta.respuesta4,
+      respuesta.respuesta5, respuesta.respuesta6, respuesta.respuesta7, respuesta.respuesta8,
+      respuesta.respuesta9, respuesta.respuesta10
     ]);
-  
-    // Convierte los datos a un formato adecuado para XLSX
+
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([columns, ...data]);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Respuestas');
-  
-    // Genera y descarga el archivo Excel
+
     XLSX.writeFile(wb, 'respuestas.xlsx');
   }
-
 }

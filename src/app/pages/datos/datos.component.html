@@ -12,8 +12,24 @@
                 <span class="blog-slider__code">Descarga un Archivo Excel</span>
                 <div class="blog-slider__title">Respuestas del Formulario</div>
                 <div class="blog-slider__text">En este apartado podrás descargar respuestas de datos de la base de datos listas para clasificar.</div>
-                <button (click)="descargarExcel()" class="blog-slider__button">Descargar</button>
-                <button (click)="obtenerDatos()" class="blog-slider__button">Verificar Datos</button>
+                <div class="filters mb-4">
+                    <label class="custom-checkbox me-3">
+                        <input type="checkbox" [(ngModel)]="filters.visual"> 
+                        <span class="ms-2">Clase visual</span>
+                    </label>
+                    <label class="custom-checkbox me-3">
+                        <input type="checkbox" [(ngModel)]="filters.auditivo"> 
+                        <span class="ms-2">Clase auditivo</span>
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" [(ngModel)]="filters.kinestesico"> 
+                        <span class="ms-2">Clase kinestésico</span>
+                    </label>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary me-2" (click)="obtenerDatos()">Verificar Datos</button>
+                    <button class="btn btn-success" (click)="descargarExcel()">Descargar</button>
+                </div>
             </div>
         </div>
     </div>
