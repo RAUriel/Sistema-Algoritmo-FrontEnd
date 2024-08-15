@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class FormularioComponent {
 
-  respuestas: number[] = new Array(10).fill(null);
+  respuestas: number[] = new Array(20).fill(null);
 
   constructor(private respuestasService: RespuestasService) { }
 
@@ -94,6 +94,87 @@ export class FormularioComponent {
         { valor: 1, texto: 'Escuchando un podcast o una grabación de las instrucciones.' },
         { valor: 2, texto: 'Haciendo la receta paso a paso mientras la lees.' }
       ]
+    },
+    // Nuevas preguntas agregadas:
+    {
+      texto: 'Acabo de terminar una competencia o una prueba y me gustaría recibir una opinión. Me gustaría recibirla:',
+      opciones: [
+        { valor: 0, texto: 'Mediante gráficos que muestren lo que alcancé.' },
+        { valor: 1, texto: 'De alguien que lo hable conmigo.' },
+        { valor: 2, texto: 'Utilizando ejemplos de lo que he hecho.' }
+      ]
+    },
+    {
+      texto: 'A la hora de elegir una carrera o un área de estudio, esto es importante para mí:',
+      opciones: [
+        { valor: 0, texto: 'Trabajar con diseños, mapas o gráficos.' },
+        { valor: 1, texto: 'Comunicarme con otros a través del diálogo.' },
+        { valor: 2, texto: 'Aplicar mis conocimientos en situaciones reales.' }
+      ]
+    },
+    {
+      texto: 'Prefiero un presentador o un profesor que utilice:',
+      opciones: [
+        { valor: 0, texto: 'Diagramas, cuadros, mapas o gráficos.' },
+        { valor: 1, texto: 'Folletos, libros o lecturas.' },
+        { valor: 2, texto: 'Demostraciones, modelos o sesiones prácticas.' }
+      ]
+    },
+    {
+      texto: 'Quiero aprender sobre un nuevo proyecto. Me gustaría pedir:',
+      opciones: [
+        { valor: 0, texto: 'Diagramas que muestren las etapas del proyecto con gráficos de beneficios y costes.' },
+        { valor: 1, texto: 'Una oportunidad para hablar sobre el proyecto.' },
+        { valor: 2, texto: 'Ejemplos en los que el proyecto se haya utilizado con éxito.' }
+      ]
+    },
+    {
+      texto: 'Cuando aprendo de Internet, me gusta:',
+      opciones: [
+        { valor: 0, texto: 'Los vídeos que muestran cómo hacer o fabricar algo.' },
+        { valor: 1, texto: 'Los canales de audio donde puedo escuchar podcasts o entrevistas.' },
+        { valor: 2, texto: 'Descripciones, listas y explicaciones escritas interesantes.' }
+      ]
+    },
+    {
+      texto: 'Tengo un problema en el corazón. Preferiría que el médico:',
+      opciones: [
+        { valor: 0, texto: 'Le mostrara un diagrama de lo que está mal.' },
+        { valor: 1, texto: 'Le diera algo que leer para explicar lo que está mal.' },
+        { valor: 2, texto: 'Utilizara un modelo de plástico para mostrar lo que está mal.' }
+      ]
+    },
+    {
+      texto: 'Quiero aprender a jugar un nuevo juego de mesa o de cartas. Yo:',
+      opciones: [
+        { valor: 0, texto: 'Utilizaría los diagramas que explican las distintas fases, movimientos y estrategias del juego.' },
+        { valor: 1, texto: 'Leería las instrucciones.' },
+        { valor: 2, texto: 'Observaría a otros jugar antes de unirme al juego.' }
+      ]
+    },
+    {
+      texto: 'Una página web tiene un vídeo que muestra cómo hacer un gráfico o una tabla especial. Hay una persona hablando, algunas listas y palabras que describen lo que hay que hacer y algunos diagramas. Aprendería más:',
+      opciones: [
+        { valor: 0, texto: 'Viendo los diagramas.' },
+        { valor: 1, texto: 'Escuchando.' },
+        { valor: 2, texto: 'Viendo las acciones.' }
+      ]
+    },
+    {
+      texto: 'Quiero ahorrar más dinero y decidir entre una serie de opciones. Yo:',
+      opciones: [
+        { valor: 0, texto: 'Usaría gráficos que muestren diferentes opciones para diferentes periodos de tiempo.' },
+        { valor: 1, texto: 'Hablaría con un experto sobre las opciones.' },
+        { valor: 2, texto: 'Consideraría ejemplos de cada opción utilizando mi información financiera.' }
+      ]
+    },
+    {
+      texto: 'Quiero aprender a hacer algo nuevo en una computadora. Yo:',
+      opciones: [
+        { valor: 0, texto: 'Seguiría los diagramas de un libro.' },
+        { valor: 1, texto: 'Leería las instrucciones escritas que vienen con el programa.' },
+        { valor: 2, texto: 'Empezaría a utilizarlo y aprender por ensayo y error.' }
+      ]
     }
   ];
 
@@ -114,13 +195,13 @@ export class FormularioComponent {
     // Define las columnas del archivo Excel
     /*
     const columns = [
-      'Pregunta 1', 'Pregunta 2', 'Pregunta 3', 'Pregunta 4', 'Pregunta 5', 
+      'Pregunta 1', 'Pregunta 2', 'Pregunta 3', 'Pregunta 4', 'Pregunta 5',
       'Pregunta 6', 'Pregunta 7', 'Pregunta 8', 'Pregunta 9', 'Pregunta 10'
     ];*/
 
-    
+
     const columns = [
-      '¿Cuál de los siguientes métodos prefieres para aprender algo nuevo?', 'Cuando estudias, ¿qué tipo de material te resulta más efectivo?', '¿Cómo te sientes más cómodo al recordar información?', 'En una clase, ¿qué tipo de actividad te ayuda a entender mejor el contenido?', 'Si tienes que ensamblar un mueble, ¿cómo prefieres seguir las instrucciones?', 
+      '¿Cuál de los siguientes métodos prefieres para aprender algo nuevo?', 'Cuando estudias, ¿qué tipo de material te resulta más efectivo?', '¿Cómo te sientes más cómodo al recordar información?', 'En una clase, ¿qué tipo de actividad te ayuda a entender mejor el contenido?', 'Si tienes que ensamblar un mueble, ¿cómo prefieres seguir las instrucciones?',
       '¿Qué tipo de ejercicios prefieres en una clase de educación física?', '¿Cuál es tu método preferido para repasar antes de un examen?', '¿Cómo prefieres aprender a usar un nuevo software o aplicación?', '¿Qué te resulta más fácil recordar después de una conferencia?', '¿Cómo prefieres preparar una receta de cocina?'
     ];
 
