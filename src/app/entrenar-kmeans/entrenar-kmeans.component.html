@@ -1,0 +1,24 @@
+<input type="file" (change)="onFileChange($event)">
+
+<div *ngIf="fileError" class="error">{{ fileError }}</div>
+
+<div *ngIf="data.length > 0">
+  <h3>Datos del Excel:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of data[0]">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data.slice(1)">
+        <td *ngFor="let cell of row">{{ cell }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<label for="numClusters">Número de Clusters:</label>
+<input type="number" id="numClusters" [(ngModel)]="numClusters">
+
+<button (click)="entrenarModelo()">Entrenar Modelo</button>

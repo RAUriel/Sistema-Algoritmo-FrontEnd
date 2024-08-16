@@ -15,6 +15,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { DatosComponent } from './pages/datos/datos.component';
 import { GeneralComponent } from './components/algoritmos/general/general.component';
+import { EntrenarKmeansComponent } from './entrenar-kmeans/entrenar-kmeans.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { GeneralComponent } from './components/algoritmos/general/general.compon
     FooterComponent,
     HeaderComponent,
     DatosComponent,
-    GeneralComponent
+    GeneralComponent,
+    EntrenarKmeansComponent
   ],
   imports: [
     BrowserModule,

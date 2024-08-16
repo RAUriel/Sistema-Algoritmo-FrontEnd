@@ -23,5 +23,8 @@ export class KmeansService {
   clasificarRespuestas(respuestas: number[][]): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/clasificarRespuestas`, { respuestas });
   }
-  
+
+  entrenarNuevoModelo(trainingData: number[][], numClusters: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/entrenarmodelo`, { trainingData, numClusters });
+  }
 }
